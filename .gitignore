@@ -1,0 +1,63 @@
+# Arquivos gerados pelo Maven
+target/
+
+# Arquivos gerados pelo IDE
+.classpath
+.project
+.settings/
+
+# Arquivos de configuração local
+application.properties
+
+# Logs
+logging/
+
+# Cache do Thymeleaf
+target/
+src/main/resources/templates/*.html
+
+# Bytecode e arquivos de compilação Java
+*.class
+*.jar
+*.war
+*.ear
+
+# Diretório de saída dos binários
+bin/
+
+# Diretório de saída dos bytecode (caso seja diferente do Maven)
+target/
+
+# Arquivos de configuração IDE (Eclipse, IntelliJ, etc.)
+.settings/
+*.iml
+*.ipr
+*.iws
+
+# Arquivos de configuração de dependências geradas pelo Maven
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+
+# Arquivos gerados por ferramentas de build (Gradle, etc.)
+build/
+out/
+
+# Arquivos de log
+logs/
+*.log
+
+# Arquivos de projeto específicos do IDE (por exemplo, Eclipse)
+.classpath
+.project
+
+# Arquivos de propriedades locais ou de ambiente (que podem conter informações sensíveis)
+application.properties
+application-dev.properties
+application-prod.properties
+application-local.properties
+application.yml
+
