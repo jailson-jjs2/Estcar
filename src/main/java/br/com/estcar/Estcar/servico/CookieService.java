@@ -30,7 +30,9 @@ public class CookieService {
 	        ).map(e -> e.getValue())  // Obtém o valor do cookie encontrado
 	        .orElse(null);  // Retorna o valor do cookie ou nulo se não for encontrado
 	    	
-	    	 valor = URLDecoder.decode(valor, "UTF-8");
+	    	if (valor != null) {
+	    		valor = URLDecoder.decode(valor, "UTF-8");
+	    	}
 	    	 
 	    	 return valor;
 	}
