@@ -46,7 +46,7 @@ public class Administrador {
 	}
 
 	public String getSenha() {
-		return senha;
+		return senha.substring(0, 2) + "*****";
 	}
 
 	public void setSenha(String senha) {
