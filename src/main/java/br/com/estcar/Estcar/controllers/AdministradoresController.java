@@ -65,10 +65,6 @@ public class AdministradoresController {
 	}
 	
 	
-	
-	
-	
-	
 	@GetMapping("/administradores/{id}/excluir")
 	public String excluir(@PathVariable int id) {
 		repo.deleteById(id);
