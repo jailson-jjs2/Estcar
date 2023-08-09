@@ -70,6 +70,15 @@ public class AdministradoresController {
 		repo.deleteById(id);
 		return "redirect:/administradores";
 	}
+	
+	
+	
+	
+	@GetMapping("/estacionamento")
+	public String estacionamento() {
+		
+		return "estacionamento";
+	}
 
 
 
