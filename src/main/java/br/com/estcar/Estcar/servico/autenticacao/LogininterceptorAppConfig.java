@@ -13,6 +13,7 @@ public class LogininterceptorAppConfig extends WebMvcConfigurerAdapter {
 		registry.addInterceptor(new LoginInterceptor())
 		.excludePathPatterns(
 				"/login",
+				"/estacionamento",
 				"/error",
 				"/logar",
 				"/vendor/**",

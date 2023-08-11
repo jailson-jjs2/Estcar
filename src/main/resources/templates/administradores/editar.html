@@ -23,6 +23,22 @@
 						    <label for="senha">Senha</label>
 						    <input type="password" required class="form-control" th:value="${administrador?.senha}" id="senha" name="senha" placeholder="Digite o senha">
 						  </div>
+						  
+						  <div class="form-group">
+						    <label for="quant_vaga">Q. Vaga</label>
+						    <input type="number" required class="form-control" th:value="${administrador?.quant_vaga}"
+						    	id="quant_vaga" name="quant_vaga" placeholder="Digite a quant. de vaga">
+						  </div>
+						  <div class="form-group">
+						    <label for="valor_estacionamento">V. Est.</label>
+						    <input type="number" required class="form-control" th:value="${administrador?.valor_estacionamento}" 
+						    	id="valor_estacionamento" name="valor_estacionamento" placeholder="Digite o valor do estacionamento">
+						  </div>
+						  <div class="form-group">
+						    <label for="valor_hora">V. H</label>
+						    <input type="number" required class="form-control" th:value="${administrador?.valor_hora}" 
+						    	id="valor_hora" name="valor_hora" placeholder="Digite o valor da hora">
+						  </div>
 
 						  <button type="submit" class="btn btn-primary">Alterar</button>
 						</form>
@@ -31,5 +47,6 @@
 
                 </div>
                 <!-- /.container-fluid -->
-<div th:replace="compartilhado/baixo">...</div>                
+<div th:replace="compartilhado/baixo">...</div>               
+
                 

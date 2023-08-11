@@ -10,7 +10,7 @@
 					
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4" style="padding: 30px;">
-						<form method="POST" action="/administradores/criar"> <!--ENVIA O CAD. QUANDO BTN ENVIAR-->
+						<form method="POST" action="/administradores/criar" onsubmit="formatDecimalInputs()">> <!--ENVIA O CAD. QUANDO BTN ENVIAR-->
 						  <div class="form-group">
 						    <label for="nome">Nome</label>
 						    <input type="text" required class="form-control" id="nome" name="nome" placeholder="Digite o nome">
@@ -24,6 +24,25 @@
 						    <label for="senha">Senha</label>
 						    <input type="password" required class="form-control" id="senha" name="senha" placeholder="Digite o senha">
 						  </div>
+						  
+							<div class="form-group">
+							  <label for="quant_vaga">Qtd. Vagas</label>
+							  <input type="number" class="form-control" id="quant_vaga" name="quant_vaga" 
+							  	required placeholder="Digite a quantidade de Vagas">
+						  	</div>
+							<div class="form-group">
+							    <label for="valor_estacionamento">Valor Estac.</label>
+							    <input type="text" class="form-control" id="valor_estacionamento" name="valor_estacionamento" 
+							           required placeholder="Digite o valor do Estacionamento" 
+							           pattern="[0-9]*([,.][0-9]{0,2})?" 
+							           title="Digite um valor válido no formato 10,00">
+							</div>
+				            <div class="form-group">
+				                <label for="valor_hora">Valor Hora</label>
+				                <input type="text" class="form-control" id="valor_hora" name="valor_hora" 
+				                	required placeholder="Didite o valor P/ hora ou 0"
+				                	pattern="[0-9]*([,.][0-9]{0,2})?"  >
+				            </div>
 
 						  <button type="submit" class="btn btn-primary">Enviar</button>
 						</form>
@@ -32,5 +51,16 @@
 
                 </div>
                 <!-- /.container-fluid -->
-<div th:replace="compartilhado/baixo">...</div>                
+<div th:replace="compartilhado/baixo">...</div>       
+    
+
+<script>
+    function formatDecimalInputs() {
+        const valorEstacionamentoInput = document.getElementById('valor_estacionamento');
+        valorEstacionamentoInput.value = valorEstacionamentoInput.value.replace(',', '.');
+        
+        const valorHoraInput = document.getElementById('valor_hora');
+        valorHoraInput.value = valorHoraInput.value.replace(',', '.');
+    }
+</script>
                 

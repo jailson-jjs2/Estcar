@@ -1,0 +1,31 @@
+<div th:replace="compartilhado/top">...</div>
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Novo Estacionamento</h1>
+    <p class="mb-4">
+        Cadastro de Estacionamento
+    </p>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4" style="padding: 30px;">
+        <form method="POST" th:action="@{/estacionamento/criar}">
+            <div class="form-group">
+                <label for="numVaga">Número da Vaga:</label>
+                <select class="form-control" id="numVaga" name="numVaga" required>
+                    <option th:each="vagaDisponivel : ${vagasDisponiveis}" th:value="${vagaDisponivel}" th:text="${vagaDisponivel}"></option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="placaCarro">Placa do Carro:</label>
+                <input type="text" class="form-control" id="placaCarro" name="placaCarro" placeholder="Digite a placa" required>
+            </div>
+            <!-- Outros campos e opções, se necessário -->
+            <button type="submit" class="btn btn-primary">Adicionar Vaga</button>
+        </form>
+    </div>
+
+</div>
+<!-- /.container-fluid -->
+<div th:replace="compartilhado/baixo">...</div>
