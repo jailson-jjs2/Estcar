@@ -41,9 +41,9 @@
 										<!-- EXEMPLO FOR EACH THYMELEAF -->
                                         <tr th:each="vaga : ${vagasEstacionamento}">
                                             <td th:text="${vaga.id}"></td>
-                                            <td th:text="${vaga.num_vaga}"></td>
-                                            <td th:text="${vaga.placa_carro}"></td>
-                                            <td th:text="${vaga.tempo_estacionado}"></td>
+                                            <td th:text="${vaga.placaCarro}"></td>
+                                            <td th:text="${vaga.numVaga}"></td>
+                                            <td th:text="${vaga.tempoEstacionado}"></td>
                                             
                                             <td><a th:href="@{'/estacionamento/' + ${vaga.id}}" class="btn btn-warning">Alterar</td>
                                             

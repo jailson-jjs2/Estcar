@@ -18,7 +18,6 @@ public class VagaEstacionamento {
 	private Administrador administrador;
 	
 	
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
@@ -65,6 +64,16 @@ public class VagaEstacionamento {
 	public void setTempoEstacionado(int tempoEstacionado) {
 		this.tempoEstacionado = tempoEstacionado;
 	}
+
+	public Administrador getAdministrador() {
+		return administrador;
+	}
+
+	public void setAdministrador(Administrador administrador) {
+		this.administrador = administrador;
+	}
+
+
 	
 
 }

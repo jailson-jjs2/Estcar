@@ -27,12 +27,10 @@ public class EstacionamentoController {
 	
 	
 	@GetMapping("/estacionamento")
-	public String index(Model model) {
-		
-		List<Administrador> administradores = (List<Administrador>) adminRepo.findAll();
-		model.addAttribute("administradores", administradores);
-			
-		return "estacionamento/index";
+	public String estacionamento(Model model) {
+	    List<VagaEstacionamento> vagasEstacionamento = (List<VagaEstacionamento>) vagaRepo.findAll();
+	    model.addAttribute("vagasEstacionamento", vagasEstacionamento);
+	    return "estacionamento/index";
 	}
 	
 	

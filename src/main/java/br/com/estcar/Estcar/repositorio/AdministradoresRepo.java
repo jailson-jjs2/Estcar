@@ -7,7 +7,7 @@ import br.com.estcar.Estcar.models.Administrador;
 
 public interface AdministradoresRepo extends CrudRepository<Administrador, Integer> {
 	
-	// CASO USAR BOSCA COM QUERY
+	// CASO USAR BUSCA COM QUERY
 	@Query(value="select CASE WHEN count(1) > 0 THEN 'true' ELSE 'false' END from administradores where id = :id", nativeQuery = true)
 	public boolean exist(int id);
 	
