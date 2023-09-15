@@ -29,3 +29,18 @@
 </div>
 <!-- /.container-fluid -->
 <div th:replace="compartilhado/baixo">...</div>
+
+<script th:inline="javascript">
+    $(document).ready(function() {
+        $("form").submit(function() {
+            var numVaga = $("#placaCarro").val();
+            
+            // Verifique se numVaga tem exatamente 7 caracteres
+            if (numVaga.length !== 7) {
+                alert("Digite exatamente 7 dígitos para a placa!!");
+                return false; // Impede o envio do formulário
+            }
+        });
+    });
+</script>
+

@@ -41,9 +41,9 @@
 										<!-- EXEMPLO FOR EACH THYMELEAF -->
                                         <tr th:each="vaga : ${vagasEstacionamento}">
                                             <td th:text="${vaga.id}"></td>
-                                            <td th:text="${vaga.placaCarro}"></td>
+                                            <td th:text="${vaga.placaFormatada}"></td>
                                             <td th:text="${vaga.numVaga}"></td>
-                                            <td th:text="${vaga.tempoEstacionado}"></td>
+                                            <td th:text="${#temporals.format(vaga.tempoEstacionado, 'dd/MM/yyyy HH:mm')}"></td>
                                             
                                             <td><a th:href="@{'/estacionamento/' + ${vaga.id}}" class="btn btn-warning">Alterar</td>
                                             
@@ -60,7 +60,8 @@
 
                 </div>
                 <!-- /.container-fluid -->
-<div th:replace="compartilhado/baixo">...</div>                
+<div th:replace="compartilhado/baixo">...</div>
+
 
 <!--FUNÇÃO EXCLUIR-->
 <script th:inline="javascript">

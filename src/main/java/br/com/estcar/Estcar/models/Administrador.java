@@ -102,7 +102,4 @@ public class Administrador {
 	public void setVagasEstacionamento(List<VagaEstacionamento> vagasEstacionamento) {
 		this.vagasEstacionamento = vagasEstacionamento;
 	}
-	
-	
-
 }

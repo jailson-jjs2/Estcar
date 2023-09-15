@@ -22,8 +22,6 @@ public class AdministradorServico {
 		vaga.setAdministrador(administrador);
 		administrador.getVagasEstacionamento().add(vaga);
 		
-		administradoresRepo.save(administrador);
-		
+		administradoresRepo.save(administrador);	
 	}
-
 }

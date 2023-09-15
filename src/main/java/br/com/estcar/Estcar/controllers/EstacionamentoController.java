@@ -1,8 +1,13 @@
 package br.com.estcar.Estcar.controllers;
 
+import java.io.UnsupportedEncodingException;
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +20,7 @@ import br.com.estcar.Estcar.models.Administrador;
 import br.com.estcar.Estcar.models.VagaEstacionamento;
 import br.com.estcar.Estcar.repositorio.AdministradoresRepo;
 import br.com.estcar.Estcar.repositorio.VagaEstacionamentoRepo;
+import br.com.estcar.Estcar.servico.CookieService;
 
 @Controller
 public class EstacionamentoController {
@@ -27,36 +33,85 @@ public class EstacionamentoController {
 	
 	
 	@GetMapping("/estacionamento")
-	public String estacionamento(Model model) {
-	    List<VagaEstacionamento> vagasEstacionamento = (List<VagaEstacionamento>) vagaRepo.findAll();
-	    model.addAttribute("vagasEstacionamento", vagasEstacionamento);
+	public String estacionamento(Model model, HttpServletRequest request) throws UnsupportedEncodingException {
+	    // Obter o ID do administrador a partir do cookie
+	    String adminIdCookie = CookieService.getCookie(request, "usuarioId");
+	    if (adminIdCookie != null) {
+	        int administradorId = Integer.parseInt(adminIdCookie);
+	        Administrador administradorLogado = adminRepo.findById(administradorId).orElse(null);
+	        if (administradorLogado != null) {
+	            // Consultar as vagas de estacionamento associadas ao administrador logado
+	            List<VagaEstacionamento> vagasEstacionamento = administradorLogado.getVagasEstacionamento();
+	            model.addAttribute("vagasEstacionamento", vagasEstacionamento);
+	        }
+	    }
 	    return "estacionamento/index";
 	}
-	
+
 	
 	@GetMapping("/estacionamento/novo")
-	public String novo() {
-		
-		return "estacionamento/novo";
+	public String novo(Model model, HttpServletRequest request) throws UnsupportedEncodingException {
+	    String adminIdCookie = CookieService.getCookie(request, "usuarioId");
+	    if (adminIdCookie != null) {
+	        int administradorId = Integer.parseInt(adminIdCookie);
+	        Administrador administradorLogado = adminRepo.findById(administradorId).orElse(null);
+	        if (administradorLogado != null) {
+	            // Obtenha a quantidade máxima de vagas permitidas pelo administrador
+	            int quantidadeMaximaVagas = administradorLogado.getQuant_vaga();
+	            
+	            // Crie uma lista de todas as vagas disponíveis
+	            List<Integer> todasVagasDisponiveis = new ArrayList<>();
+	            for (int i = 1; i <= quantidadeMaximaVagas; i++) {
+	                todasVagasDisponiveis.add(i);
+	            }
+	            
+	            // Obtenha as vagas já criadas pelo administrador
+	            List<VagaEstacionamento> vagasCriadas = administradorLogado.getVagasEstacionamento();
+	            List<Integer> vagasCriadasList = vagasCriadas.stream()
+	                    .map(vaga -> Integer.parseInt(vaga.getNumVaga()))
+	                    .collect(Collectors.toList());
+	            
+	            // Remova as vagas já criadas das vagas disponíveis
+	            todasVagasDisponiveis.removeAll(vagasCriadasList);
+	            
+	            // Passe as vagas disponíveis para o modelo
+	            model.addAttribute("vagasDisponiveis", todasVagasDisponiveis);
+	        }
+	    }
+	    
+	    return "estacionamento/novo";
 	}
 	
 	
 	@PostMapping("/estacionamento/criar")
 	public String criar(@RequestParam("numVaga") String numVaga,
-						@RequestParam("placaCarro") String placaCarro) {
-							
-							LocalDateTime entrada = LocalDateTime.now();
-							int tempoEstacionado = (int) Duration.between(entrada, LocalDateTime.now()).toHoursPart();
-							
-							VagaEstacionamento vagaEstacionamento = new VagaEstacionamento();
-							vagaEstacionamento.setNumVaga(numVaga);
-							vagaEstacionamento.setPlacaCarro(placaCarro);
-							vagaEstacionamento.setTempoEstacionado(tempoEstacionado);
-							
-							vagaRepo.save(vagaEstacionamento);
-							
-							return "redirect:/estacionamento";
-						}
-						
-
+	                    @RequestParam("placaCarro") String placaCarro,
+	                    HttpServletRequest request) throws UnsupportedEncodingException {
+	    // Obtenha o ID do administrador a partir do cookie
+	    String adminIdCookie = CookieService.getCookie(request, "usuarioId");
+	    if (adminIdCookie != null) {
+	        int administradorId = Integer.parseInt(adminIdCookie);
+	        Administrador administradorLogado = adminRepo.findById(administradorId).orElse(null);
+	        if (administradorLogado != null) {
+	            // Crie um novo objeto VagaEstacionamento
+	            VagaEstacionamento vagaEstacionamento = new VagaEstacionamento();
+	            vagaEstacionamento.setNumVaga(numVaga);
+	            vagaEstacionamento.setPlacaCarro(placaCarro);
+	            
+	            // Associe o administrador ao objeto VagaEstacionamento
+	            vagaEstacionamento.setAdministrador(administradorLogado);
+	            
+	            // Obtenha a data e hora atual
+	            LocalDateTime entrada = LocalDateTime.now();
+	            
+	            // Salve a data e hora de entrada no objeto VagaEstacionamento como tempoEstacionado
+	            vagaEstacionamento.setTempoEstacionado(entrada);
+	            
+	            // Salve o objeto VagaEstacionamento no repositório
+	            vagaRepo.save(vagaEstacionamento);
+	        }
+	    }
+	    
+	    return "redirect:/estacionamento";
+	}				
 }
