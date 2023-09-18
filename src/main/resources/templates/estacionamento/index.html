@@ -21,7 +21,9 @@
                                         <tr>
                                             <th>Placa do Carro</th>
                                             <th>Num. da Vaga</th>
-                                            <th>Tempo Estacionado</th>
+                                            <th>Entrada</th>
+                                            <th>Tempo</th>
+                                            <th>Valor a Pagar</th>
                                             <th></th>
                                             <th></th>
                                         </tr>
@@ -30,7 +32,9 @@
                                         <tr>
                                             <th>Placa do Carro</th>
                                             <th>Num. da Vaga</th>
-                                            <th>Tempo Estacionado</th>
+                                            <th>Entrada</th>
+                                            <th>Tempo</th>
+                                            <th>Valor a Pagar</th>
                                             <th></th>
                                             <th></th>
                                         </tr>
@@ -41,6 +45,8 @@
                                             <td th:text="${vaga.placaFormatada}"></td>
                                             <td th:text="${vaga.numVaga}"></td>
                                             <td th:text="${#temporals.format(vaga.tempoEstacionado, 'dd/MM/yyyy HH:mm')}"></td>
+                                            <td th:text="${vaga.getTempoEstacionadoFormatado()}"></td>
+                                            <td th:text="${vaga.valorAPagar}"></td>
                                             
                                             <td><a th:href="@{'/estacionamento/' + ${vaga.id}}" class="btn btn-warning">Alterar</td>
                                             

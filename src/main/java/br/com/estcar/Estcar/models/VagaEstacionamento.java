@@ -1,5 +1,6 @@
 package br.com.estcar.Estcar.models;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -37,6 +38,19 @@ public class VagaEstacionamento {
 	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
 	private LocalDateTime tempoEstacionado;
 	
+	@Column(name = "valorAPagar")
+	private double valorAPagar;
+	
+	
+	
+
+	public double getValorAPagar() {
+		return valorAPagar;
+	}
+
+	public void setValorAPagar(double valorAPagar) {
+		this.valorAPagar = valorAPagar;
+	}
 
 	public int getId() {
 		return id;
@@ -78,6 +92,7 @@ public class VagaEstacionamento {
 		this.administrador = administrador;
 	}
 	
+	
 	public String getPlacaFormatada() {
 	    if (placaCarro != null && placaCarro.length() == 7) {
 	    	String placaMaiuscula = placaCarro.toUpperCase();
@@ -85,5 +100,19 @@ public class VagaEstacionamento {
 	    }
 	    return placaCarro;
 	}
-
+	
+	public String getTempoEstacionadoFormatado() {
+		
+        LocalDateTime now = LocalDateTime.now();
+        Duration tempoDecorrido = Duration.between(tempoEstacionado, now);
+        
+        long horas = tempoDecorrido.toHours();
+        long minutos = tempoDecorrido.toMinutesPart();
+        
+        if (horas > 0) {
+            return String.format("%d H e %d min", horas, minutos);
+        } else {
+            return String.format("%d min", minutos);
+        }
+    }
 }

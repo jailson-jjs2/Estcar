@@ -21,6 +21,7 @@ import br.com.estcar.Estcar.models.VagaEstacionamento;
 import br.com.estcar.Estcar.repositorio.AdministradoresRepo;
 import br.com.estcar.Estcar.repositorio.VagaEstacionamentoRepo;
 import br.com.estcar.Estcar.servico.CookieService;
+import br.com.estcar.Estcar.servico.EstacionamentoService;
 
 
 @Controller
@@ -31,6 +32,9 @@ public class EstacionamentoController {
 	
 	@Autowired
 	private VagaEstacionamentoRepo vagaRepo;
+	
+	@Autowired
+	private EstacionamentoService estacionamentoService;
 	
 	
 	@GetMapping("/estacionamento")
@@ -43,6 +47,13 @@ public class EstacionamentoController {
 	        if (administradorLogado != null) {
 	            // Consultar as vagas de estacionamento associadas ao administrador logado
 	            List<VagaEstacionamento> vagasEstacionamento = administradorLogado.getVagasEstacionamento();
+	            
+	            // Calcular o valor a pagar para cada vaga e adicioná-lo ao modelo
+	            for (VagaEstacionamento vaga : vagasEstacionamento) {
+	            	double valorAPagar = estacionamentoService.calcularValorAPagar(vaga, administradorLogado);
+	            	vaga.setValorAPagar(valorAPagar);
+	            }
+	            
 	            model.addAttribute("vagasEstacionamento", vagasEstacionamento);
 	        }
 	    }
