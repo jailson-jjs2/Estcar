@@ -10,14 +10,17 @@
 					
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4" style="padding: 30px;">
-						<form method="POST" th:action="@{'/estacionamento/' + ${vaga.id} + '/atualizar'}">
-						  <div class="form-group">
-               				<label for="numVaga">Número da Vaga:</label>
-                			<input type="text" class="form-control" th:value="${vaga?.num_vaga}" id="numVaga" name="numVaga" placeholder="Digite o número da vaga" required>
-            			</div>
+						<form method="POST" th:action="@{'/estacionamento/' + ${vagaEstacionamento.id} + '/atualizar'}">
+	<div class="form-group">
+	        <label for="numVaga">Número da Vaga:</label>
+	        <select class="form-control" id="numVaga" name="numVaga">
+	            <!-- Loop para listar as vagas disponíveis -->
+	            <option th:each="vagaDisponivel : ${vagasDisponiveis}" th:value="${vagaDisponivel}" th:text="${vagaDisponivel}"></option>
+	        </select>
+	    </div>
            				 <div class="form-group">
                 			<label for="placaCarro">Placa do Carro:</label>
-                			<input type="text" class="form-control" th:value="${vaga?.placa_carro}" id="placaCarro" name="placaCarro" placeholder="Digite a placa do carro" required>
+                			<input type="text" class="form-control" th:value="${vagaEstacionamento?.placaCarro}" id="placaCarro" name="placaCarro" placeholder="Digite a placa do carro" required>
             			</div>
 
 						  <button type="submit" class="btn btn-primary">Alterar</button>
