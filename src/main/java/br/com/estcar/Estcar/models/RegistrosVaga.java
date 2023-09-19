@@ -25,6 +25,13 @@ public class RegistrosVaga {
 	@ManyToOne
 	@JoinColumn(name = "administrador_id")
 	private Administrador administrador;
+
+	@ManyToOne
+	@JoinColumn(name = "placa_id")
+	private VagaEstacionamento placa;
+	
+	@Column(name = "placa")
+	private String placaCarro;
 	
 	@Column(name = "data_liberacao")
 	private LocalDateTime dataLiberacao;
@@ -37,6 +44,22 @@ public class RegistrosVaga {
 	private String dataLiberacaoFormatada;
 	
 	
+	
+	public String getPlacaCarro() {
+		return placaCarro;
+	}
+	
+	public void setPlacaCarro(String placaCarro) {
+		this.placaCarro = placaCarro;
+	}
+	
+	public VagaEstacionamento getPlaca() {
+		return placa;
+	}
+	
+	public void setPlaca(VagaEstacionamento placa) {
+		this.placa = placa;
+	}
 
 	public int getId() {
 		return id;

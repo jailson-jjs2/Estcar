@@ -201,6 +201,7 @@ public class EstacionamentoController {
             RegistrosVaga registroLiberacao = new RegistrosVaga();
             registroLiberacao.setAdministrador(vaga.getAdministrador());
             registroLiberacao.setDataLiberacao(LocalDateTime.now());
+            registroLiberacao.setPlacaCarro(vaga.getPlacaFormatada());
             
             // Use o método calcularValorAPagar para obter o valor a ser pago
             double valorAPagar = estacionamentoService.calcularValorAPagar(vaga, vaga.getAdministrador());

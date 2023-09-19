@@ -18,14 +18,14 @@
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>ID</th>
+                                            <th>Placa</th>
                                             <th>Data</th>
                                             <th>Valor total</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th>ID</th>
+                                            <th>Placa</th>
                                             <th>Data</th>
                                             <th>Valor total</th>
                                         </tr>
@@ -33,7 +33,7 @@
                                     <tbody>
 										<!-- EXEMPLO FOR EACH THYMELEAF -->
                                         <tr th:each="registro : ${registros}">
-                                            <td th:text="${registro.id}"></td>
+                                            <td th:text="${registro.placaCarro}"></td>
                                             <td th:text="${registro.dataLiberacaoFormatada}"></td>
         									<td th:text="${registro.valorPago}"></td>
                                         </tr>
