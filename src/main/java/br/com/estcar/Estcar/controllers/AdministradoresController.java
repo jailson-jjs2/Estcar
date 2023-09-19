@@ -70,10 +70,4 @@ public class AdministradoresController {
 		repo.deleteById(id);
 		return "redirect:/administradores";
 	}
-	
-	
-
-
-
-
 }

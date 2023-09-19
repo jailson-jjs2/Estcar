@@ -184,4 +184,10 @@ public class EstacionamentoController {
         }
         return "redirect:/estacionamento";
     }
+    
+	@GetMapping("/estacionamento/{id}/excluir")
+	public String excluir(@PathVariable int id) {
+		vagaRepo.deleteById(id);
+		return "redirect:/estacionamento";
+	}
 }

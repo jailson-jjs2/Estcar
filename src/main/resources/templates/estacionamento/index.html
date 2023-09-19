@@ -52,7 +52,7 @@
                                             
                                             <td><a href="#" th:onclick="'javascript:confirmarExclusao(\'' 
                                             	+ @{/estacionamento/{id}(id=${vaga.id})}
-												+ '/excluir\')'" class="btn btn-danger">Excluir
+												+ '/excluir\')'" class="btn btn-success">Liberar
 											</td>
                                         </tr>
                                     </tbody>
@@ -69,7 +69,7 @@
 <!--FUNÇÃO EXCLUIR-->
 <script th:inline="javascript">
     function confirmarExclusao(url) {
-        if (confirm('Excluir ?')) {
+        if (confirm('Liberar ?')) {
             window.location.href = url;
         }
     }
