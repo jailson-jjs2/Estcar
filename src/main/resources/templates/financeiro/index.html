@@ -20,15 +20,10 @@
                                         <tr>
                                             <th>Placa</th>
                                             <th>Data</th>
-                                            <th>Valor total</th>
+                                            <th>Valor Pago</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
-                                        <tr>
-                                            <th>Placa</th>
-                                            <th>Data</th>
-                                            <th>Valor total</th>
-                                        </tr>
                                     </tfoot>
                                     <tbody>
 										<!-- EXEMPLO FOR EACH THYMELEAF -->
@@ -38,6 +33,10 @@
         									<td th:text="${registro.valorPago}"></td>
                                         </tr>
                                     </tbody>
+                                         <tr>
+                                            <th colspan="2">Valor Total</th>
+        									<td th:text="${valorTotalAPagar}" style="font-weight: bold;"></td>
+                                        </tr>
                                 </table>
                             </div>
                         </div>
