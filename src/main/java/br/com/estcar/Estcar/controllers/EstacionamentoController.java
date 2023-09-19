@@ -4,6 +4,7 @@ import java.io.UnsupportedEncodingException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,8 +18,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import br.com.estcar.Estcar.models.Administrador;
+import br.com.estcar.Estcar.models.RegistrosVaga;
 import br.com.estcar.Estcar.models.VagaEstacionamento;
 import br.com.estcar.Estcar.repositorio.AdministradoresRepo;
+import br.com.estcar.Estcar.repositorio.RegistrosVagaRepo;
 import br.com.estcar.Estcar.repositorio.VagaEstacionamentoRepo;
 import br.com.estcar.Estcar.servico.CookieService;
 import br.com.estcar.Estcar.servico.EstacionamentoService;
@@ -35,6 +38,9 @@ public class EstacionamentoController {
 	
 	@Autowired
 	private EstacionamentoService estacionamentoService;
+	
+	@Autowired
+	private RegistrosVagaRepo registroRepo;
 	
 	
 	@GetMapping("/estacionamento")
@@ -131,7 +137,7 @@ public class EstacionamentoController {
 	
 	@GetMapping("/estacionamento/{id}")
 	public String buscar(@PathVariable int id, Model model, HttpServletRequest request) throws UnsupportedEncodingException {
-	    java.util.Optional<VagaEstacionamento> vaga = vagaRepo.findById(id);
+	    Optional<VagaEstacionamento> vaga = vagaRepo.findById(id);
 	    if (vaga.isPresent()) {
 	        model.addAttribute("vagaEstacionamento", vaga.get());
 
@@ -175,7 +181,7 @@ public class EstacionamentoController {
 
     @PostMapping("/estacionamento/{id}/atualizar")
     public String atualizar(@PathVariable int id, VagaEstacionamento vaga) {
-        java.util.Optional<VagaEstacionamento> vagaExistente = vagaRepo.findById(id);
+        Optional<VagaEstacionamento> vagaExistente = vagaRepo.findById(id);
         if (vagaExistente.isPresent()) {
             VagaEstacionamento vagaAtual = vagaExistente.get();
             vagaAtual.setNumVaga(vaga.getNumVaga());
@@ -185,9 +191,28 @@ public class EstacionamentoController {
         return "redirect:/estacionamento";
     }
     
-	@GetMapping("/estacionamento/{id}/excluir")
-	public String excluir(@PathVariable int id) {
-		vagaRepo.deleteById(id);
-		return "redirect:/estacionamento";
-	}
+    @GetMapping("/estacionamento/{id}/excluir")
+    public String excluir(@PathVariable int id, HttpServletRequest request) {
+        Optional<VagaEstacionamento> vagaOptional = vagaRepo.findById(id);
+        if (vagaOptional.isPresent()) {
+            VagaEstacionamento vaga = vagaOptional.get();
+            
+            // Crie um novo registro de liberação
+            RegistrosVaga registroLiberacao = new RegistrosVaga();
+            registroLiberacao.setAdministrador(vaga.getAdministrador());
+            registroLiberacao.setDataLiberacao(LocalDateTime.now());
+            
+            // Use o método calcularValorAPagar para obter o valor a ser pago
+            double valorAPagar = estacionamentoService.calcularValorAPagar(vaga, vaga.getAdministrador());
+            registroLiberacao.setValorPago(valorAPagar);
+           
+            // Salve o registro de liberação no banco de dados
+            registroRepo.save(registroLiberacao);
+            
+            // Exclua a vaga do estacionamento
+            vagaRepo.deleteById(id);
+        }
+        return "redirect:/estacionamento";
+    }
+
 }
