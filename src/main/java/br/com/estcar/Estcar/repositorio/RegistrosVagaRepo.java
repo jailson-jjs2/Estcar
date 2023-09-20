@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 
 import br.com.estcar.Estcar.models.Administrador;
 import br.com.estcar.Estcar.models.RegistrosVaga;
@@ -18,5 +19,15 @@ public interface RegistrosVagaRepo extends CrudRepository<RegistrosVaga, Integer
     Double calcularSomaValorPago();
 
 	public List<RegistrosVaga> findByAdministrador(Administrador administradorLogado);
+	
+	@Query(value = "SELECT * FROM registro_liberacao WHERE MONTH(data_liberacao) = :mes AND administrador_id = :administradorId", nativeQuery = true)
+    List<RegistrosVaga> findByAdministradorAndMonth(
+        @Param("administradorId") int administradorId, 
+        @Param("mes") String mes
+    );
+
+
+
+
 	
 }
