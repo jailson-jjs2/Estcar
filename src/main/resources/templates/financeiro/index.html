@@ -13,24 +13,30 @@
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary custom-title" style="display: inline-block;">Resumo Financeiro</h6>
                         </div>
-						<form th:action="@{/financeiro}" method="get">
-						    <label for="mes">  Selecione o mês:</label>
-						    <select id="mes" name="mes">
-						        <option value="01">Janeiro</option>
-						        <option value="02">Fevereiro</option>
-						        <option value="03">Março</option>
-						        <option value="04">Abril</option>
-						        <option value="05">Maio</option>
-						        <option value="06">Julho</option>
-						        <option value="07">Junho</option>
-						        <option value="08">Agosto</option>
-						        <option value="09">Setembro</option>
-						        <option value="10">Outubro</option>
-						        <option value="11">Novembro</option>
-						        <option value="12">Dezembro</option>
-						    </select>
-						    <button type="submit" class="btn btn-primary">Filtrar</button>
-						</form>
+							<form th:action="@{/financeiro}" method="get">
+							    <label for="mes">  Selecione o mês:</label>
+							    <select id="mes" name="mes">
+							        <option value="01">Janeiro</option>
+							        <option value="02">Fevereiro</option>
+							        <option value="03">Março</option>
+							        <option value="04">Abril</option>
+							        <option value="05">Maio</option>
+							        <option value="06">Julho</option>
+							        <option value="07">Junho</option>
+							        <option value="08">Agosto</option>
+							        <option value="09">Setembro</option>
+							        <option value="10">Outubro</option>
+							        <option value="11">Novembro</option>
+							        <option value="12">Dezembro</option>
+							    </select>
+							    <label for="ano">Selecione o Ano:</label>
+								<select id="ano" name="ano">
+								    <option value="2023">2023</option>
+								    <option value="2024">2024</option>
+								    <!-- Adicione os anos desejados aqui -->
+								</select>
+							    <button type="submit" class="btn btn-primary">Filtrar</button>
+							</form>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">

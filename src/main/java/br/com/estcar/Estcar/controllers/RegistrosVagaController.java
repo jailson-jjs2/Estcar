@@ -27,9 +27,10 @@ public class RegistrosVagaController {
     private AdministradoresRepo adminRepo;
 	
 
-
 	@GetMapping("/financeiro")
-	public String index(@RequestParam(name = "mes", required = false) String mes, Model model, HttpServletRequest request) throws UnsupportedEncodingException {
+	public String index(@RequestParam(name = "mes", required = false) String mes,
+						@RequestParam(name = "ano", required = false) String ano,
+						Model model, HttpServletRequest request) throws UnsupportedEncodingException {
 	    // Obter o ID do administrador a partir do cookie
 	    String adminIdCookie = CookieService.getCookie(request, "usuarioId");
 	    if (adminIdCookie != null) {
@@ -38,21 +39,25 @@ public class RegistrosVagaController {
 	        if (administradorLogado != null) {
 	            List<RegistrosVaga> registros;
 
-	            if (mes != null && !mes.isEmpty()) {
+	            if (mes != null && !mes.isEmpty() && ano != null && !ano.isEmpty()) {
+	                // Consultar os registros financeiros associados ao administrador logado para o mês e ano selecionados
+	                registros = repo.findByAdministradorAndMonthAndYear(administradorLogado.getId(), mes, ano);
+
+	            } else if (mes != null && !mes.isEmpty()) {
 	                // Consultar os registros financeiros associados ao administrador logado para o mês selecionado
-	            	registros = repo.findByAdministradorAndMonth(administradorLogado.getId(), mes);
+	                registros = repo.findByAdministradorAndMonth(administradorLogado.getId(), mes);
 
 	            } else {
 	                // Consultar todos os registros financeiros associados ao administrador logado
 	                registros = repo.findByAdministrador(administradorLogado);
 	            }
 
-	            // Formate a data antes de passá-la para o Thymeleaf
+	            	// Formate a data antes de passá-la para o Thymeleaf
 	            for (RegistrosVaga registro : registros) {
 	                registro.setDataLiberecaoFormatada(registro.getDataLiberacaoFormatada());
 	            }
 
-	            // Calcular a soma dos valores pagos
+	            	// Calcular a soma dos valores pagos
 	            double valorTotalAPagar = registros.stream()
 	                    .mapToDouble(RegistrosVaga::getValorPago)
 	                    .sum();
@@ -63,5 +68,4 @@ public class RegistrosVagaController {
 	    }
 	    return "financeiro/index";
 	}
-	
 }
