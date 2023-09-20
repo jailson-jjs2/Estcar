@@ -1,74 +1,80 @@
 <div th:replace="compartilhado/top">...</div>
-                <!-- Begin Page Content -->
-                <div class="container-fluid">
+<!-- Begin Page Content -->
+<div class="container-fluid">
 
-                    <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Financeiro</h1>
-                    <p class="mb-4">
-						Mostrar resumo financeiro
-					</p>
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Financeiro</h1>
+    <p class="mb-4">
+        Mostrar resumo financeiro
+    </p>
 
-                    <!-- DataTales Example -->
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary custom-title" style="display: inline-block;">Resumo Financeiro</h6>
-                        </div>
-							<form th:action="@{/financeiro}" method="get">
-							    <label for="mes">  Selecione o mês:</label>
-							    <select id="mes" name="mes">
-							        <option value="01">Janeiro</option>
-							        <option value="02">Fevereiro</option>
-							        <option value="03">Março</option>
-							        <option value="04">Abril</option>
-							        <option value="05">Maio</option>
-							        <option value="06">Julho</option>
-							        <option value="07">Junho</option>
-							        <option value="08">Agosto</option>
-							        <option value="09">Setembro</option>
-							        <option value="10">Outubro</option>
-							        <option value="11">Novembro</option>
-							        <option value="12">Dezembro</option>
-							    </select>
-							    <label for="ano">Selecione o Ano:</label>
-								<select id="ano" name="ano">
-								    <option value="2023">2023</option>
-								    <option value="2024">2024</option>
-								    <!-- Adicione os anos desejados aqui -->
-								</select>
-							    <button type="submit" class="btn btn-primary">Filtrar</button>
-							</form>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>Placa</th>
-                                            <th>Data</th>
-                                            <th>Valor Pago</th>
-                                        </tr>
-                                    </thead>
-                                    <tfoot>
-                                    </tfoot>
-                                    <tbody>
-										<!-- EXEMPLO FOR EACH THYMELEAF -->
-                                        <tr th:each="registro : ${registros}">
-                                            <td th:text="${registro.placaCarro}"></td>
-                                            <td th:text="${registro.dataLiberacaoFormatada}"></td>
-        									<td th:text="${registro.valorPago}"></td>
-                                        </tr>
-                                    </tbody>
-                                         <tr>
-                                            <th colspan="2">Valor Total</th>
-        									<td th:text="${valorTotalAPagar}" style="font-weight: bold;"></td>
-                                        </tr>
-                                </table>
-                            </div>
-                        </div>
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary custom-title" style="display: inline-block;">Resumo Financeiro</h6>
+        </div>
+
+        <div class="input-group mb-3">
+            <form th:action="@{/financeiro}" method="get">
+                <div class="d-flex">
+                    <div class="mr-2">
+                        <label for="mes" class="input-group-text">Selecione o mês:</label>
+                        <select id="mes" name="mes" class="custom-select">
+                            <option value="01">Janeiro</option>
+                            <option value="02">Fevereiro</option>
+                            <option value="03">Março</option>
+                            <option value="04">Abril</option>
+                            <option value="05">Maio</option>
+                            <option value="06">Julho</option>
+                            <option value="07">Junho</option>
+                            <option value="08">Agosto</option>
+                            <option value="09">Setembro</option>
+                            <option value="10">Outubro</option>
+                            <option value="11">Novembro</option>
+                            <option value="12">Dezembro</option>
+                        </select>
                     </div>
-
+                    <div class="mr-2">
+                        <label for="ano" class="input-group-text">Selecione o Ano:</label>
+                        <select id="ano" name="ano" class="custom-select">
+                            <option value="2023">2023</option>
+                            <option value="2024">2024</option>
+                            <!-- Adicione os anos desejados aqui -->
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Filtrar</button>
                 </div>
-                <!-- /.container-fluid -->
+            </form>
+        </div>
+
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Placa</th>
+                            <th>Data</th>
+                            <th>Valor Pago</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th colspan="2">Valor Total</th>
+                            <td th:text="${valorTotalAPagar}" style="font-weight: bold;"></td>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        <!-- EXEMPLO FOR EACH THYMELEAF -->
+                        <tr th:each="registro : ${registros}">
+                            <td th:text="${registro.placaCarro}"></td>
+                            <td th:text="${registro.dataLiberacaoFormatada}"></td>
+                            <td th:text="${registro.valorPago}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.container-fluid -->
 <div th:replace="compartilhado/baixo">...</div>
-
-
-                
