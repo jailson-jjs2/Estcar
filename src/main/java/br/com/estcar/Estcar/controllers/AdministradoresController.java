@@ -58,6 +58,10 @@ public class AdministradoresController {
                 model.addAttribute("administradores", administradores);
             }
         }
+        
+        model.addAttribute("nome", CookieService.getCookie(request,	"usuarioNome"));
+        model.addAttribute("pageName", "Admin.");
+        
         return "administradores/index";
     }
 

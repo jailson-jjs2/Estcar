@@ -18,6 +18,8 @@ public class HomeController {
 		
 		model.addAttribute("nome", CookieService.getCookie(request,	"usuarioNome"));
 		
+		model.addAttribute("pageName", "ESTCAR");
+		
 		return "home/index";
 	}
 

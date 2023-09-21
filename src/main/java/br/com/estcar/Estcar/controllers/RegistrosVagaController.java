@@ -72,6 +72,10 @@ public class RegistrosVagaController {
 	            model.addAttribute("valorTotalAPagar", valorTotalAPagar);
 	        }
 	    }
+	    
+	    model.addAttribute("nome", CookieService.getCookie(request,	"usuarioNome"));
+	    model.addAttribute("pageName", "Fin.");
+	    
 	    return "financeiro/index";
 	}
 }

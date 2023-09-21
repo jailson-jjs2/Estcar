@@ -63,6 +63,10 @@ public class EstacionamentoController {
 	            model.addAttribute("vagasEstacionamento", vagasEstacionamento);
 	        }
 	    }
+	    
+	    model.addAttribute("nome", CookieService.getCookie(request,	"usuarioNome"));
+        model.addAttribute("pageName", "Estac.");
+	    
 	    return "estacionamento/index";
 	}
 
