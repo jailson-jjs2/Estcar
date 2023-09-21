@@ -20,6 +20,12 @@ public interface RegistrosVagaRepo extends CrudRepository<RegistrosVaga, Integer
 
 	public List<RegistrosVaga> findByAdministrador(Administrador administradorLogado);
 	
+	@Query(value = "SELECT * FROM registro_liberacao r WHERE "
+	        + "DATE(r.data_liberacao) = :dia AND r.administrador_id = :administrador",
+	        nativeQuery = true)
+	List<RegistrosVaga> findByAdministradorAndDay(@Param("administrador") int i,
+	        @Param("dia") String dia);
+	
 	@Query(value = "SELECT * FROM registro_liberacao WHERE MONTH(data_liberacao) = :mes AND administrador_id = :administradorId", nativeQuery = true)
     List<RegistrosVaga> findByAdministradorAndMonth(
         @Param("administradorId") int administradorId, 
