@@ -18,8 +18,8 @@
             <form th:action="@{/financeiro}" method="get">
                 <div class="d-flex">
                     <div class="mr-2">
-                        <label for="mes" class="input-group-text">Selecione o mês:</label>
-                        <select id="mes" name="mes" class="custom-select">
+                        <label for="mes" class="input-group-text mx-2 my-2">Selecione o mês:</label>
+                        <select id="mes" name="mes" class="custom-select mx-2 my-2">
                             <option value="01">Janeiro</option>
                             <option value="02">Fevereiro</option>
                             <option value="03">Março</option>
@@ -35,15 +35,17 @@
                         </select>
                     </div>
                     <div class="mr-2">
-                        <label for="ano" class="input-group-text">Selecione o Ano:</label>
-                        <select id="ano" name="ano" class="custom-select">
+                        <label for="ano" class="input-group-text mx-2 my-2">Selecione o Ano:</label>
+                        <select id="ano" name="ano" class="custom-select mx-2 my-2">
                             <option value="2023">2023</option>
                             <option value="2024">2024</option>
                             <!-- Adicione os anos desejados aqui -->
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-primary">Filtrar</button>
                 </div>
+                    <div class="mr-2 mx-2 my-2">
+                    	<button type="submit" class="btn btn-primary btn-block">Filtrar</button>
+					</div>
             </form>
         </div>
 
