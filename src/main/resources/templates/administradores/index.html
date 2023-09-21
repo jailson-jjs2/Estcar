@@ -1,74 +1,83 @@
 <div th:replace="compartilhado/top">...</div>
-                <!-- Begin Page Content -->
-                <div class="container-fluid">
+<!-- Begin Page Content -->
+<div class="container-fluid">
 
-                    <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Administradores</h1>
-                    <p class="mb-4">
-						Mostrar lista dos administradores do sistema
-					</p>
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Administradores</h1>
+    <p class="mb-4">
+        Mostrar lista dos administradores do sistema
+    </p>
 
-                    <!-- DataTales Example -->
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-							<a href="/administradores/novo" class="btn btn-primary" style="margin-right: 20px;">Novo</a>
-                            <h6 class="m-0 font-weight-bold text-primary custom-title" style="display: inline-block;">Lista de administradores</h6>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>Nome</th>
-                                            <th>Email</th>
-                                            <th>Senha</th>
-                                            <th>Q.Vagas</th>
-                                            <th>V.Est.</th>
-                                            <th>V.Hora</th>
-                                            <th></th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Nome</th>
-                                            <th>Email</th>
-                                            <th>Senha</th>
-                                            <th>Q.Vagas</th>
-                                            <th>V.Est.</th>
-                                            <th>V.Hora</th>
-                                            <th></th>
-                                            <th></th>
-                                        </tr>
-                                    </tfoot>
-                                    <tbody>
-										<!-- EXEMPLO FOR EACH THYMELEAF -->
-                                        <tr th:each="administrador : ${administradores}">
-                                            <td th:text="${administrador.nome}"></td>
-                                            <td th:text="${administrador.email}"></td>
-                                            <td th:text="${administrador.senha}"></td>
-                                            <td th:text="${administrador.quant_vaga}"></td>
-                                            <td th:text="${administrador.valor_estacionamento}"></td>
-                                            <td th:text="${administrador.valor_hora}"></td>
-                                            
-                                            <td><a th:href="@{'/administradores/' + ${administrador.id}}" class="btn btn-warning">Alterar</td>
-                                            
-                                            <td><a href="#" th:onclick="'javascript:confirmarExclusao(\'' 
-                                            	+ @{/administradores/{id}(id=${administrador.id})}
-												+ '/excluir\')'" class="btn btn-danger">Excluir
-											</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+			<!-- Verifique se o administrador logado é 'dev.ti.2023@gmail.com' antes de mostrar o botão Novo -->
+			<a th:if="${administradorLogado != null && administradorLogado.email == 'dev.ti.2023@gmail.com'}" 
+			href="/administradores/novo" class="btn btn-primary" style="margin-right: 20px;">Novo</a>
 
-                </div>
-                <!-- /.container-fluid -->
-<div th:replace="compartilhado/baixo">...</div>                
+            <h6 class="m-0 font-weight-bold text-primary custom-title" style="display: inline-block;">Lista de administradores</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Email</th>
+                            <th>Senha</th>
+                            <th>Q.Vagas</th>
+                            <th>V.Est.</th>
+                            <th>V.Hora</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Email</th>
+                            <th>Senha</th>
+                            <th>Q.Vagas</th>
+                            <th>V.Est.</th>
+                            <th>V.Hora</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        <!-- EXEMPLO FOR EACH THYMELEAF -->
+                        <tr th:each="administrador : ${administradores}">
+                            <td th:text="${administrador.nome}"></td>
+                            <td th:text="${administrador.email}"></td>
+                            <td th:text="${administrador.senha}"></td>
+                            <td th:text="${administrador.quant_vaga}"></td>
+                            <td th:text="${administrador.valor_estacionamento}"></td>
+                            <td th:text="${administrador.valor_hora}"></td>
 
-<!--FUNÇÃO EXCLUIR-->
+                            <td><a th:href="@{'/administradores/' + ${administrador.id}}" class="btn btn-warning">Alterar</a></td>
+
+                            <!-- Verifique se o administrador logado é 'dev.ti.2023@gmail.com' antes de mostrar o botão Excluir -->
+							<td>
+							    <a href="#" th:if="${administradorLogado != null && administradorLogado.email == 'dev.ti.2023@gmail.com'}"
+							        th:onclick="'javascript:confirmarExclusao(\'' 
+							        + @{/administradores/{id}(id=${administrador.id})}
+							        + '/excluir\')'" class="btn btn-danger">Excluir
+							    </a>
+							</td>
+                            <!-- Se não for 'dev.ti.2023@gmail.com', mostre uma célula vazia -->
+                            <td th:unless="${administradorLogado.email == 'dev.ti.2023@gmail.com'}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- /.container-fluid -->
+<div th:replace="compartilhado/baixo">...</div>
+
+<!-- FUNÇÃO EXCLUIR -->
 <script th:inline="javascript">
     function confirmarExclusao(url) {
         if (confirm('Excluir ?')) {
@@ -76,4 +85,3 @@
         }
     }
 </script>
-                
