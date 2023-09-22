@@ -44,7 +44,7 @@
                                         <tr th:each="vaga : ${vagasEstacionamento}">
                                             <td th:text="${vaga.placaFormatada}"></td>
                                             <td th:text="${vaga.numVaga}"></td>
-                                            <td th:text="${#temporals.format(vaga.tempoEstacionado, 'dd/MM/yyyy HH:mm')}"></td>
+                                            <td th:text="${#temporals.format(vaga.tempoEstacionado.minusHours(3), 'dd/MM/yyyy HH:mm')}"></td>
                                             <td th:text="${vaga.getTempoEstacionadoFormatado()}"></td>
                                             <td th:text="${vaga.valorAPagar}"></td>
                                             
