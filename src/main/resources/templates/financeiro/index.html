@@ -69,7 +69,7 @@
                         <!-- EXEMPLO FOR EACH THYMELEAF -->
                         <tr th:each="registro : ${registros}">
                             <td th:text="${registro.placaCarro}"></td>
-                            <td th:text="${registro.dataLiberacaoFormatada}"></td>
+                            <td th:text="${registro.dataLiberacaoFormatada.minusHours(3)}"></td>
                             <td th:text="${registro.valorPago}"></td>
                         </tr>
                     </tbody>
