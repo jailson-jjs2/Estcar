@@ -49,7 +49,7 @@
                         <tr th:each="administrador : ${administradores}">
                             <td th:text="${administrador.nome}"></td>
                             <td th:text="${administrador.email}"></td>
-                            <td th:text="${administrador.senha}"></td>
+                            <td th:text="${administrador.senhaMasked}"></td>
                             <td th:text="${administrador.quant_vaga}"></td>
                             <td th:text="${administrador.valor_estacionamento}"></td>
                             <td th:text="${administrador.valor_hora}"></td>
