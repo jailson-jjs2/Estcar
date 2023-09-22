@@ -88,7 +88,7 @@ public class Administrador {
 	}
 
 	public String getSenha() {
-		return senha.substring(0, 2) + "*****";
+		return senha;
 	}
 
 	public void setSenha(String senha) {
@@ -101,5 +101,9 @@ public class Administrador {
 
 	public void setVagasEstacionamento(List<VagaEstacionamento> vagasEstacionamento) {
 		this.vagasEstacionamento = vagasEstacionamento;
+	}
+	
+	public String getSenhaMasked() {
+		return "******";
 	}
 }
