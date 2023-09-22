@@ -95,8 +95,10 @@ public class AdministradoresController {
     @PostMapping("/administradores/{id}/atualizar")
     public String atualizar(@PathVariable int id, Administrador administrador, HttpServletRequest request) throws UnsupportedEncodingException {
         int adminId = getAdminIdFromCookie(request);
-        if (adminId != -1 && adminId == id) {
-            // Verifique se o administrador logado está tentando atualizar seus próprios dados
+        Administrador adminLogado = repo.findById(adminId).orElse(null);
+
+        if (adminLogado != null && (adminLogado.getEmail().equals("dev.ti.2023@gmail.com") || adminId == id)) {
+            // Verifique se o administrador logado é o root ou se está atualizando seus próprios dados
             administrador.setId(id);
             repo.save(administrador);
         }
